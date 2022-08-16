@@ -2,7 +2,12 @@
    <router-view></router-view>
 </template>
 <script>
-export default {};
+// import Topbar from '@/views/RegisterView.vue'
+export default {
+   // components:{
+   //    Topbar
+   // }
+};
 </script>
 <style>
 

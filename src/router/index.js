@@ -1,11 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import store from '@/store'
 
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "dashboard",
     component: HomeView,
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
   {
     path: "/about",
@@ -15,6 +24,14 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
   {
     path: "/login",
@@ -44,6 +61,14 @@ const routes = [
       import(
         /* webpackChunkName: "about" */ "../views/Home/RegisteredView.vue"
       ),
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
   {
     path: "/subscribers",
@@ -55,6 +80,14 @@ const routes = [
       import(
         /* webpackChunkName: "about" */ "../views/Home/SubscribersView.vue"
       ),
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
   {
     path: "/unsubscribers",
@@ -66,6 +99,14 @@ const routes = [
       import(
         /* webpackChunkName: "about" */ "../views/Home/UnsubscribersView.vue"
       ),
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
   {
     path: "/manage-blog",
@@ -75,6 +116,14 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/blogs/ManageBlog.vue"),
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
   {
     path: "/create-blog",
@@ -84,6 +133,14 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/blogs/CreateBlog.vue"),
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
   {
     path: "/manage-podcast",
@@ -95,6 +152,14 @@ const routes = [
       import(
         /* webpackChunkName: "about" */ "../views/podcast/managePodcast.vue"
       ),
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
   {
     path: "/create-podcast",
@@ -106,6 +171,14 @@ const routes = [
       import(
         /* webpackChunkName: "about" */ "../views/podcast/createPodcast.vue"
       ),
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
   {
     path: "/manage-referral",
@@ -117,6 +190,14 @@ const routes = [
       import(
         /* webpackChunkName: "about" */ "../views/referral/ReferralView.vue"
       ),
+    beforeEnter: (to, from, next) => {
+      // ...
+      if (!store.getters["auth/authenticated"]) {
+        return next({
+          name: "login",
+        });
+      }
+    },
   },
 ];
 
