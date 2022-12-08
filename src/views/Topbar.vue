@@ -1535,12 +1535,12 @@
                                   />
                                 </div>
                                 <div class="widget-content-left">
-                                  <!-- <div class="widget-heading">
+                                  <div class="widget-heading">
                                       {{ user.name }}
                                     </div>
                                     <div class="widget-subheading opacity-8">
-                                     {{user.adminType}}
-                                    </div> -->
+                                     {{user.role}}
+                                    </div>
                                 </div>
                                 <div class="widget-content-right mr-2">
                                   <button
@@ -1670,8 +1670,8 @@
                   </div>
                 </div>
                 <div class="widget-content-left ml-3 header-user-info">
-                  <!-- <div class="widget-heading">{{ user.name }}</div> -->
-                  <!-- <div class="widget-subheading">{{ user.adminType }}</div> -->
+                  <div class="widget-heading">{{ user.name }}</div>
+                 <div class="widget-subheading">{{ user.role }}</div>
                 </div>
                 <div class="widget-content-right header-user-info ml-3">
                   <button

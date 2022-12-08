@@ -109,14 +109,15 @@ export default {
     }),
     
     submit() {
-    // let response = await axios.post('https://prep50.herokuapp.comadmin',this.form);
+    // let response = await axios.post('https://prep50.herokuapp.com/admin',this.form);
     // console.log(response.data);
      this.logIn(this.form).then(()=>{
       this.$router.replace({
         name:'dashboard'
       })
-     }).catch(()=>{
-      console.log('Wrong details passed')
+      console.log('logging to dashboard');
+     }).catch((e)=>{
+      console.log('Wrong details passed', e)
      })
     }
   }

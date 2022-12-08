@@ -1,23 +1,24 @@
 
 import axios from 'axios'
+import * as jose from 'jose'
 
 export default {
   namespaced: true,
   state: {
-    token: null,
+    access: null,
     user: null,
   },
   getters: { 
     authenticated (state){
-        return state.token && state.user
+        return state.access && state.user
     },
     user(state){
         return state.user
     }
   },
   mutations: {
-    SET_TOKEN(state, token) {
-      state.token = token;
+    SET_TOKEN(state, access) {
+      state.access = access;
     },
     SET_USER(state, data) {
       state.user = data;
@@ -26,33 +27,46 @@ export default {
   actions: {
     async logIn({ dispatch }, Credentials) {
       let response = await axios.post('admin', Credentials);
-        //  let response = await fetch("https://prep50.herokuapp.com/admin", {
-        //    method: "POST",
-        //    headers: { "Content-Type": "application/json" },
-        //    body: JSON.stringify(Credentials),
-        //  });
-      return dispatch("attempt", response.data.token);
-      //  console.log(response.data);
+      
+        
+        // console.log(response.data.data);
+        //  console.log(response.data.data.access);
+      dispatch("attempt", response.data.data.access);
+     
+       
     },
-    async attempt({ commit, state }, token) {
-        if(token){
-           commit("SET_TOKEN", token);
+    
+    async attempt({ commit, state }, access) {
+      commit("SET_TOKEN", access);
+      // console.log(access);
+        if(access){
+           commit("SET_TOKEN", access);
         }
-        if(!state.token)
-        return
+        if (!state.access) return;
      
       // console.log(token);
       try {
-        let response = await axios.get('auth/me',{
-            headers:{
-                'Authorization':'Bearer' + token
-            }
-        });
-        commit("SET_USER", response.data);
+        //  let dec = jose.decodeJwt(access)
+        //     auth.user = (dec as unknown as JWTCLAIMS).aud as SET_USER
+        //     commit("SET_USER", response.data.data);
+         let dec = jose.decodeJwt(access)
+            // user = dec as unknown as JWTCLAIMS => aud as User
+
+            console.log(dec)
+            
+            commit("SET_USER", dec);
+            // setUserToken(auth.token)
+        // let response = await axios.get("/admin/user", {
+        //   headers: {
+        //     Authorization: "Bearer" + access,
+        //   },
+        // });
+        // commit("SET_USER", response.data.data);
+        // console.log(response.data.data);
       } catch (e) {
         commit('SET_TOKEN', null)
         commit('SET_USER', null);
-        // console.log('failed');
+        console.log('failed');
       }
     },
     logOut({commit}){
